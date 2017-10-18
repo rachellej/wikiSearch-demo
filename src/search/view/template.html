@@ -1,0 +1,15 @@
+<div class="p-wiki-search">
+
+	<div class="p-wiki-search__container" ng-class="{'p-wiki-search__container--top': searchData.term}">
+		<h1 class="p-wiki-search__header">
+			<span class="p-wiki-search__header-wiki">wiki</span><span class="p-wiki-search__header-search">Search</span>
+		</h1>
+		<form name="searchForm" class="p-wiki-search__input-holder">
+			<input class="p-wiki-search__input" name="search" type="text" ng-model="searchData.term" placeholder="search wikipedia" ng-model-options="{debounce: 200}" autocomplete="off" required/>
+			<button ng-if="canClearInput()" class="p-wiki-search__input-clear" type="reset" ng-click="reset()"></button>
+		</form>
+		
+		<ui-view></ui-view>
+	</div>
+
+</div>

@@ -1,0 +1,11 @@
+
+
+<ul class="search-pages__list">
+	<li ng-repeat="page in pages">
+		<a href="{{'https://en.wikipedia.org/?curid=' + page.pageid}}" class="search-pages__list-link">
+
+			<div class="search-pages__list-title">{{page.title}}</div>
+			<p ng-bind-html="page.snippet" class="search-pages__list-snippet"></p>
+		</a>
+	</li>
+</ul>

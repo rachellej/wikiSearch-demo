@@ -1,0 +1,144 @@
+
+.p-wiki-search
+{
+	&__container
+	{
+		position: absolute;
+		width: 100%;
+		max-width: 420px;
+		margin: 0 auto;
+		top: 250px;
+		left: 50%;
+		transform: translateX(-50%);
+		transition: top 100ms;
+
+		&--top
+		{
+			top: -60px;
+		}
+	}
+
+	&__header
+	{
+		text-align: center;
+		font-size: 52px;	
+
+		&-wiki
+		{
+			color: #899193;
+			font-weight: 100;
+		}
+
+		&-search
+		{
+			color: #0FA5EA;
+		}
+	}
+
+	&__input-holder
+	{
+		margin: 10px auto 0;
+		max-width: 270px;
+		display: block;
+		position: relative;
+	}
+
+	&__input
+	{
+		width: 100%;
+		line-height: 26px;
+		font-size: 16px;
+		padding-left: 5px;
+		font-family: inherit;
+		background: white;
+		outline: none;
+		border: 1px solid #899193;
+		font-weight: 300;
+		color: #899193;
+		
+		&::placeholder 
+		{ 
+			color: #BEC3C3; 
+		}
+
+		&:focus
+		{
+			outline: #0FA5EA auto 3px;
+		};
+
+		&:not(:valid) ~ .p-wiki-search__input-clear
+		{
+			display: none;
+		}
+	}
+
+	&__input-clear
+	{
+		width: 10px;
+		height: 10px;
+		position: absolute;
+		background-color: #ccc;
+		right: 15px;
+		top: 50%;
+		-webkit-transform: translateY(-50%);
+		transform: translateY(-50%);
+		border-radius: 50%;
+		color: #ffffff;
+		cursor: pointer;
+		border: 0;
+		outline: none;
+
+		&:after
+		{
+			content: '+';
+			font-size: 12px;
+			position: absolute;
+			left: 2px;
+			top: -2px;
+			transform: rotate(135deg);
+		}
+	}
+}
+
+.search-pages
+{
+	&__list
+	{
+		display: block;
+		margin-top: 20px;
+
+	}
+
+	&__list-link
+	{
+		padding: 20px 20px;
+		display: block;
+		cursor: pointer;
+
+		&:hover
+		{
+			background: #EDEDED;
+			box-shadow: 0px 0px 2px 6px #EDEDED;
+		}
+
+		&:link, &:visited, &:hover, &:active
+		{
+			color: inherit;
+			text-decoration: none;
+		}
+	}
+
+	&__list-title
+	{
+		color: #0FA5EA;
+		font-size: 16px;
+	}
+
+	&__list-snippet
+	{
+		margin-top: 5px;
+		font-size: 10px;
+		line-height: 1.5;
+		color: #899193;
+	}
+}

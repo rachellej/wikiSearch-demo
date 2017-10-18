@@ -1,0 +1,19 @@
+* {
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
+	letter-spacing: -.02em;
+}
+
+ul
+{
+	list-style-type: none;
+}
+
+body
+{
+	/*Not the exact font but font identifiers couldn't find the right one and this is similar/free font. Normally I'd get the exact font from a psd.*/
+	font-family: 'Montserrat', sans-serif;
+}
+
+@import 'search/view/style.scss';

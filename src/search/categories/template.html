@@ -1,0 +1,8 @@
+
+<ul class="search-pages__list">
+	<li ng-repeat="category in categories">
+		<a class="search-pages__list-link" ui-sref="search.pages({searchTerm: category.title})">
+			<div class="search-pages__list-title">{{category.title}}</div>
+		</a>
+	</li>
+</ul>

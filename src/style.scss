@@ -1,3 +1,5 @@
+/** Globals **/
+
 * {
 	box-sizing: border-box;
 	padding: 0;
@@ -13,7 +15,13 @@ ul
 body
 {
 	/*Not the exact font but font identifiers couldn't find the right one and this is similar/free font. Normally I'd get the exact font from a psd.*/
+	
 	font-family: 'Montserrat', sans-serif;
 }
+
+/** Colors **/
+
+$blue: #0FA5EA;
+$darkGray: #899193;
 
 @import 'search/style.scss';

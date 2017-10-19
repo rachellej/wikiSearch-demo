@@ -29,9 +29,9 @@
 		font-family: inherit;
 		background: white;
 		outline: none;
-		border: 1px solid #899193;
+		border: 1px solid $darkGray;
 		font-weight: 300;
-		color: #899193;
+		color: $darkGray;
 		
 		&:focus
 		{
@@ -52,7 +52,7 @@
 		{
 			&:focus
 			{
-				outline: #0FA5EA auto 3px;
+				box-shadow: 0px 0px 3px 3px $blue;
 			}
 		}
 	}
@@ -112,7 +112,7 @@
 
 	&__list-title
 	{
-		color: #0FA5EA;
+		color: $blue;
 		font-size: 16px;
 	}
 
@@ -121,7 +121,7 @@
 		margin-top: 5px;
 		font-size: 10px;
 		line-height: 1.5;
-		color: #899193;
+		color: $darkGray;
 	}
 }
 

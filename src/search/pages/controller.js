@@ -6,7 +6,12 @@ angular.module('search').controller('SearchPagesController', function($scope, $s
 		/**
 		 * @type string
 		 */
-		searchTerm: $state.params.searchTerm,
+		category: $state.params.category,
+
+		/**
+		 * @type object
+		 */
+		searchData: Search.data,
 
 		/**
 		 * @type array
@@ -15,8 +20,8 @@ angular.module('search').controller('SearchPagesController', function($scope, $s
 
 		init: function()
 		{
-			if ($scope.searchTerm != Search.data.term)
-				Search.data.term = $scope.searchTerm;
+			if (!Search.data.term)
+				Search.data.term = $state.params.searchTerm;
 		},
 
 		/**
@@ -27,15 +32,15 @@ angular.module('search').controller('SearchPagesController', function($scope, $s
 		{
 			Search.searchPages(searchTerm, startFrom || 0).then(function(result)
 			{
-				$scope.pages.push.apply($scope.pages, result.data);
+				[].push.apply($scope.pages, result.data);
 
 				//keeping it simple -- but irl I'd paginate this
 				if (result.startFrom)
-					$scope.search($scope.searchTerm, result.startFrom);
+					$scope.search($scope.category, result.startFrom);
 			});
 		}
 	});
 
 	$scope.init();
-	$scope.search($scope.searchTerm);
+	$scope.search($scope.category);
 });

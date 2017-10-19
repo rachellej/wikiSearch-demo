@@ -19,7 +19,7 @@ angular.module('routes').config(function($stateProvider, $urlRouterProvider, $lo
 });
 },{}],3:[function(require,module,exports){
 
-angular.module('search').controller('SearchCategoriesController', function($scope, Search)
+angular.module('search').controller('SearchController', function($scope, $state, Search)
 {
 	angular.extend($scope, {
 
@@ -27,7 +27,7 @@ angular.module('search').controller('SearchCategoriesController', function($scop
 		 * @type object
 		 */
 		searchData: Search.data,
-
+		
 		/**
 		 * @type array
 		 */
@@ -45,13 +45,19 @@ angular.module('search').controller('SearchCategoriesController', function($scop
 				if (searchTerm != $scope.searchData.term)
 					return;
 
-				$scope.categories.push.apply($scope.categories, result.data);
+				[].push.apply($scope.categories, result.data);
 
 				//keeping it simple -- but irl I'd paginate this
 				if (result.continueTerm)
 					$scope.search($scope.searchData.term, result.continueTerm);
 			});
-		}
+		},
+
+		reset: function()
+		{
+			$scope.searchData.term = '';
+		},
+
 	});
 
 	$scope.$watch('searchData.term', function(newValue)
@@ -65,7 +71,6 @@ angular.module('search').controller('SearchCategoriesController', function($scop
 		else
 			$scope.categories = [];
 	});
-
 });
 },{}],4:[function(require,module,exports){
 
@@ -76,7 +81,12 @@ angular.module('search').controller('SearchPagesController', function($scope, $s
 		/**
 		 * @type string
 		 */
-		searchTerm: $state.params.searchTerm,
+		category: $state.params.category,
+
+		/**
+		 * @type object
+		 */
+		searchData: Search.data,
 
 		/**
 		 * @type array
@@ -85,8 +95,8 @@ angular.module('search').controller('SearchPagesController', function($scope, $s
 
 		init: function()
 		{
-			if ($scope.searchTerm != Search.data.term)
-				Search.data.term = $scope.searchTerm;
+			if (!Search.data.term)
+				Search.data.term = $state.params.searchTerm;
 		},
 
 		/**
@@ -97,17 +107,17 @@ angular.module('search').controller('SearchPagesController', function($scope, $s
 		{
 			Search.searchPages(searchTerm, startFrom || 0).then(function(result)
 			{
-				$scope.pages.push.apply($scope.pages, result.data);
+				[].push.apply($scope.pages, result.data);
 
 				//keeping it simple -- but irl I'd paginate this
 				if (result.startFrom)
-					$scope.search($scope.searchTerm, result.startFrom);
+					$scope.search($scope.category, result.startFrom);
 			});
 		}
 	});
 
 	$scope.init();
-	$scope.search($scope.searchTerm);
+	$scope.search($scope.category);
 });
 },{}],5:[function(require,module,exports){
 angular.module('routes.home', []);
@@ -116,22 +126,15 @@ angular.module('routes.home').config(function($stateProvider){
 
 	$stateProvider
 
-		.state('search', {
+		.state('searchCategories', {
 			url: '/',
-			abstract: true,
-			templateUrl: 'src/search/view/template.html',
+			templateUrl: '/src/search/categories/template.html',
 			controller: 'SearchController',
 		})
 
-		.state('search.categories', {
-			url: '',
-			templateUrl: 'src/search/categories/template.html',
-			controller: 'SearchCategoriesController',
-		})
-
-		.state('search.pages', {
-			url: 'pages/{searchTerm}',
-			templateUrl: 'src/search/pages/template.html',
+		.state('searchPages', {
+			url: '/pages/{searchTerm}/{category}',
+			templateUrl: '/src/search/pages/template.html',
 			controller: 'SearchPagesController',
 		})
 ;});
@@ -257,37 +260,4 @@ angular.module('search').service('Search', function($q, $http, $sce)
 	});
 	
 });
-},{}],7:[function(require,module,exports){
-
-angular.module('search').controller('SearchController', function($scope, $state, Search)
-{
-	angular.extend($scope, {
-
-		/**
-		 * @type object
-		 */
-		searchData: Search.data,
-
-		/**
-		 * @return boolean
-		 */
-		canClearInput: function()
-		{
-			return $state.current.name == 'search.categories';
-		},
-
-		reset: function()
-		{
-			$scope.searchData.term = '';
-		},
-
-	});
-
-	$scope.$watch('searchData.term', function(newValue)
-	{
-		if ($state.current.name == 'search.pages')
-			$state.go('search.categories');
-
-	});
-});
-},{}]},{},[1,2,3,4,5,6,7]);
+},{}]},{},[1,2,3,4,5,6]);

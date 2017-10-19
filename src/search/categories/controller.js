@@ -1,5 +1,5 @@
 
-angular.module('search').controller('SearchCategoriesController', function($scope, Search)
+angular.module('search').controller('SearchController', function($scope, $state, Search)
 {
 	angular.extend($scope, {
 
@@ -7,7 +7,7 @@ angular.module('search').controller('SearchCategoriesController', function($scop
 		 * @type object
 		 */
 		searchData: Search.data,
-
+		
 		/**
 		 * @type array
 		 */
@@ -25,13 +25,19 @@ angular.module('search').controller('SearchCategoriesController', function($scop
 				if (searchTerm != $scope.searchData.term)
 					return;
 
-				$scope.categories.push.apply($scope.categories, result.data);
+				[].push.apply($scope.categories, result.data);
 
 				//keeping it simple -- but irl I'd paginate this
 				if (result.continueTerm)
 					$scope.search($scope.searchData.term, result.continueTerm);
 			});
-		}
+		},
+
+		reset: function()
+		{
+			$scope.searchData.term = '';
+		},
+
 	});
 
 	$scope.$watch('searchData.term', function(newValue)
@@ -45,5 +51,4 @@ angular.module('search').controller('SearchCategoriesController', function($scop
 		else
 			$scope.categories = [];
 	});
-
 });

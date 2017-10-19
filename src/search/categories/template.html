@@ -1,8 +1,21 @@
+<div class="p-wiki-search search-pages" ng-cloak>
 
-<ul class="search-pages__list">
-	<li ng-repeat="category in categories">
-		<a class="search-pages__list-link" ui-sref="search.pages({searchTerm: category.title})">
-			<div class="search-pages__list-title">{{category.title}}</div>
-		</a>
-	</li>
-</ul>
+	<div class="p-wiki-search__container search-pages__container" ng-class="{'p-wiki-search__container--top': searchData.term}">
+		<h1 class="p-wiki-search__header">
+			<span class="p-wiki-search__header-wiki">wiki</span><span class="p-wiki-search__header-search">Search</span>
+		</h1>
+		<form name="searchForm" class="search-pages__input-holder">
+			<input class="search-pages__input" ng-class="{'search-pages__input--is-focused': !categories.length}" name="search" type="text" ng-model="searchData.term" placeholder="search wikipedia" ng-model-options="{debounce: 200}" autocomplete="off" required/>
+			<button class="search-pages__input-clear" type="reset" ng-click="reset()"></button>
+		</form>
+		
+		<ul class="search-pages__list">
+			<li ng-repeat="category in categories">
+				<a class="search-pages__list-link" ui-sref="searchPages({searchTerm: searchData.term, category: category.title})">
+					<div class="search-pages__list-title">{{category.title}}</div>
+				</a>
+			</li>
+		</ul>
+	</div>
+
+</div>

@@ -1,0 +1,31 @@
+
+.p-wiki-search
+{
+	&__container
+	{
+		top: 35%;
+
+		&--top
+		{
+			top: -63px;
+		}
+	}
+
+	&__header
+	{
+		text-align: center;
+		font-size: 52px;	
+
+		&-wiki
+		{
+			color: #899193;
+			font-weight: 100;
+		}
+
+		&-search
+		{
+			color: #0FA5EA;
+		}
+	}
+
+}

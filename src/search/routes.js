@@ -4,22 +4,15 @@ angular.module('routes.home').config(function($stateProvider){
 
 	$stateProvider
 
-		.state('search', {
+		.state('searchCategories', {
 			url: '/',
-			abstract: true,
-			templateUrl: 'src/search/view/template.html',
+			templateUrl: '/src/search/categories/template.html',
 			controller: 'SearchController',
 		})
 
-		.state('search.categories', {
-			url: '',
-			templateUrl: 'src/search/categories/template.html',
-			controller: 'SearchCategoriesController',
-		})
-
-		.state('search.pages', {
-			url: 'pages/{searchTerm}',
-			templateUrl: 'src/search/pages/template.html',
+		.state('searchPages', {
+			url: '/pages/{searchTerm}/{category}',
+			templateUrl: '/src/search/pages/template.html',
 			controller: 'SearchPagesController',
 		})
 ;});

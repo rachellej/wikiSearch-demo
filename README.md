@@ -1,4 +1,4 @@
-# System1
+# wikiSearch demo
 
 Built using Node, Grunt, Angular, and SASS.
 
